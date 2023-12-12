@@ -10,18 +10,23 @@ const Layout = (props) => {
     event.preventDefault(); // Prevent the default form submission behavior
 
     const formData = new FormData();
-    formData.set('username', username);
-    formData.set('password', password);
+    formData.set('user[username]', username);
+    formData.set('user[password]', password);
 
     // Perform the login fetch request here
-    fetch('/api/sessions', {
+    fetch('/api/sessions', safeCredentialsFormData({
       method: 'POST',
       body: formData,
-    })
+    }))
       .then(response => response.json())
       .then(data => {
         console.log(data);
         // Handle the login response from the backend
+
+        // Redirect to the tweets page on successful login
+        if (data.success === true) {
+          window.location.replace('/tweets');
+        }
       })
       .catch(error => {
         console.error(error);
