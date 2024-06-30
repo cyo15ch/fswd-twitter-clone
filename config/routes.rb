@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   get '/tweets' => 'static_pages#tweets'
 
+  resources :tweets, only: [:index]
+
   namespace :api do
     # USERS
     post '/users'                  => 'users#create'

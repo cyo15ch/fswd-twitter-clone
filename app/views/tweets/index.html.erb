@@ -1,0 +1,9 @@
+<h1>Tweets</h1>
+<ul>
+  <% @tweets.each do |tweet| %>
+    <li>
+      <p><%= tweet.content %></p>
+      <p>Created at: <%= tweet.created_at %></p>
+    </li>
+  <% end %>
+</ul>
